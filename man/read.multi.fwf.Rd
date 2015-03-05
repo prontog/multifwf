@@ -50,6 +50,10 @@ Return value is a named list with an item for each spec in multi.spec. If there 
 \description{
 Read a table of fixed width formatted data of different types into a \link{data.frame} for each type.
 }
+\details{
+Known bugs:
+Warnings on connections that are left open. Haven't figured this out yet. Somehow some files are left opened.
+}
 \examples{
 ff <- tempfile()
 cat(file = ff, '123456', '287654', '198765', sep = '\\n')
@@ -67,7 +71,7 @@ myselector <- function(line, specs) {
     else if (s == '2')
         spec_name = 'sp2'
 
-    specs[[spec_name]]
+    spec_name
 }
 
 read.multi.fwf(ff, multi.specs = specs, select = myselector)    #> sp1: 1 23 456 \\ 1 98 765, sp2: 287 65 4

@@ -16,11 +16,11 @@ selector <- function(line, specs) {
     else if (s == '2')
         spec_name = 'sp2'
     
-    specs[[spec_name]]
+    spec_name
 }
 
 emptySelector <- function(line, specs) {
-    NULL
+    ''
 }
 ###################################################################
 

@@ -30,6 +30,9 @@
 #' @param buffersize Maximum number of lines to read at one time
 #' @param dots further arguments to be passed to \link{read.fwf}.
 #' @return Return value is a named list with an item for each spec in multi.spec. If there was at least one line in file, matching a spec, then the named item will be a \link{data.frame}. Otherwise it will be NULL.
+#' @details
+#' Known bugs:
+#' Warnings on connections that are left open. Haven't figured this out yet. Somehow some files are left opened.
 #' @author
 #' Panos Rontogiannis \email{p.g.ronto@@gmail.com}
 #' @seealso \code{\link{read.fwf}}
@@ -50,7 +53,7 @@
 #'     else if (s == '2')
 #'         spec_name = 'sp2'
 #' 
-#'     specs[[spec_name]]
+#'     spec_name
 #' }
 #' 
 #' read.multi.fwf(ff, multi.specs = specs, select = myselector)    #> sp1: 1 23 456 \ 1 98 765, sp2: 287 65 4
@@ -77,8 +80,9 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
     }
     
     # Parse a line and write to the temp file of the matching spec.
-    doone <- function(line, allspecs) {        
-        s <- select(line, allspecs)
+    doone <- function(line) {        
+        spec_name <- select(line, multi.specs)
+        s <- extended.specs[[spec_name]]
         if (is.null(s))
             return()
         cat(file = openedFiles[[s$FILENAME]], line, "\n")
@@ -122,11 +126,11 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
     }
     ####################################################                 
 
-    multi.specs <- lapply(multi.specs, FUN = prepareAsList)
+    extended.specs <- lapply(multi.specs, FUN = prepareAsList)
     
     openedFiles <- list()
     
-    for (s in multi.specs) {        
+    for (s in extended.specs) {        
         # Create a temp file and open it for writing.        
         openedFiles[[s$FILENAME]] <- file(s$FILENAME, "a")
         # Prepare cleanup on function exit.
@@ -149,7 +153,7 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
         readLines(file, n = skip)    
     if (header) {
         headerline <- readLines(file, n = 1L)
-        lapply(multi.specs, FUN = addHeader, headerline)
+        lapply(extended.specs, FUN = addHeader, headerline)
     }
     
     repeat ({
@@ -163,12 +167,12 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
         if (nread == 0) 
             break        
         
-        lapply(raw, FUN = doone, multi.specs)                
+        lapply(raw, FUN = doone)                
     })
     
-    lapply(multi.specs, FUN = closeFile)
-    multi.specs <- lapply(multi.specs, FUN = readFwf)
-    multi.specs <- lapply(multi.specs, FUN = prepareRetval)
+    lapply(extended.specs, FUN = closeFile)
+    extended.specs <- lapply(extended.specs, FUN = readFwf)
+    loaded.data <- lapply(extended.specs, FUN = prepareRetval)
     
-    return(multi.specs)
+    return(loaded.data)
 }
