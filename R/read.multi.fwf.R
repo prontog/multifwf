@@ -56,14 +56,22 @@
 #'     spec_name
 #' }
 #' 
-#' read.multi.fwf(ff, multi.specs = specs, select = myselector)    #> sp1: 1 23 456 \ 1 98 765, sp2: 287 65 4
+#' read.multi.fwf(ff, multi.specs = specs, select = myselector)    
+#' #> sp1: 1 23 456 \ 1 98 765, sp2: 287 65 4
+#' 
 #' unlink(ff)
 #' @export
-read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t", skip = 0,
-                            n = -1, buffersize = 2000, ...) 
-{        
+read.multi.fwf <- function(file,
+                           multi.specs,
+                           select,
+                           header = FALSE,
+                           sep = "\t",
+                           skip = 0,
+                           n = -1,
+                           buffersize = 2000,
+                           ...) {
     ##### Helper functions #############################
-    
+
     # Convert each spec into a list containing a SPEC field. Also add
     # the FILENAME field for the temp file where all lines of this type (spec)
     # will be stored (temporarily) for read.fwf.
@@ -72,73 +80,51 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
         s$FILENAME <- tempfile("Rmfwf.")
         return(s)
     }
-    
+
     # Add header line to a temp file.
     addHeader <- function(s, headerline) {
-        cat(file = openedFiles[[s$FILENAME]], headerline, "\n")
+        cat(file = s$FILENAME, headerline, "\n")
         return(s)
     }
-    
+
     # Parse a line and write to the temp file of the matching spec.
-    doone <- function(line) {        
+    doone <- function(line) {
         spec_name <- select(line, multi.specs)
         s <- extended.specs[[spec_name]]
         if (is.null(s))
             return()
-        cat(file = openedFiles[[s$FILENAME]], line, "\n")
+        cat(file = s$FILENAME, line, "\n", append = TRUE)
         invisible()
     }
-    
-    # Close a temp file.
-    closeFile <- function(s) {
-        f <- openedFiles[[s$FILENAME]]
-        try(close(f))
-        openedFiles[[s$FILENAME]] <- NULL        
-        invisible()
-    }
-    
-    closeOpenedFiles <- function() {
-        for (f in openedFiles) {
-            try(close(f))            
-        }
-    }
-    
+
     # Read Fixed-Width Format temp file.
-    readFwf <- function(s) {        
-        # First open the file regardless of its size. This is because the file will close using on.exit.
-        f <- file(s$FILENAME, 'r')
-        openedFiles[[s$FILENAME]] <- f
+    readFwf <- function(s) {
         fi <- file.info(s$FILENAME)
-        if (fi$size > 0) {
-            s$Data <- read.fwf(file = f, widths = s$SPEC$widths, header = header, sep = sep, row.names = s$SPEC$row.names, col.names = s$SPEC$col.names, ...)
-        } 
+        if (!is.na(fi$size) & fi$size > 0) {
+            s$Data <- read.fwf(file = s$FILENAME,
+                               widths = s$SPEC$widths,
+                               header = header,
+                               sep = sep,
+                               row.names = s$SPEC$row.names,
+                               col.names = s$SPEC$col.names,
+                               ...)
+        }
         else {
             #s$Data <- NA
             s <- NULL
         }
         return(s)
     }
-    
+
     # Prepare an element for return.
-    prepareRetval <- function(s) {        
+    prepareRetval <- function(s) {
         s <- s$Data
         return(s)
     }
-    ####################################################                 
+    ####################################################
 
     extended.specs <- lapply(multi.specs, FUN = prepareAsList)
-    
-    openedFiles <- list()
-    
-    for (s in extended.specs) {        
-        # Create a temp file and open it for writing.        
-        openedFiles[[s$FILENAME]] <- file(s$FILENAME, "a")
-        # Prepare cleanup on function exit.
-        on.exit(unlink(s$FILENAME))                
-    }
-    
-    on.exit(closeOpenedFiles(), add = TRUE)
-    
+
     if (is.character(file)) {
         file <- file(file, "rt")
         on.exit(close(file), add = TRUE)
@@ -146,33 +132,34 @@ read.multi.fwf <- function(file, multi.specs, select, header = FALSE, sep = "\t"
     else if (!isOpen(file)) {
         open(file, "rt")
         on.exit(close(file), add = TRUE)
-    }        
-    
-    # Header.
-    if (skip) 
-        readLines(file, n = skip)    
+    }
+
+    # Handle header line.
     if (header) {
         headerline <- readLines(file, n = 1L)
         lapply(extended.specs, FUN = addHeader, headerline)
     }
     
+    # Skip lines.
+    if (skip)
+        readLines(file, n = skip)
+
     repeat ({
-        if (n == 0L) 
+        if (n == 0L)
             break
-        if (n == -1L) 
+        if (n == -1L)
             n <- 16
-        
+
         raw <- readLines(file, n = n)
         nread <- length(raw)
-        if (nread == 0) 
-            break        
-        
-        lapply(raw, FUN = doone)                
+        if (nread == 0)
+            break
+
+        lapply(raw, FUN = doone)
     })
-    
-    lapply(extended.specs, FUN = closeFile)
+
     extended.specs <- lapply(extended.specs, FUN = readFwf)
     loaded.data <- lapply(extended.specs, FUN = prepareRetval)
-    
+
     return(loaded.data)
 }

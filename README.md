@@ -5,6 +5,6 @@ Read a table of fixed width formatted data of different types into a data.frame 
 
 So far the package is not published in CRAN. You can either clone the repo and use RStudio to build and install the package or you could use [devtools](https://github.com/hadley/devtools) package to install directly from this repo.
 
-## Known bugs
-
-Warnings on connections that are left open. Haven't figured this out yet. Somehow some files are left opened.
+To build the package you will need:
+- roxygen2
+- testthat
