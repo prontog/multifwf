@@ -1,8 +1,8 @@
 Package: multifwf
 Type: Package
-Title: Read Fixed Width Format Files containing lines of different Type
+Title: Read Fixed Width Format Files Containing Lines of Different Type
 Version: 0.2.1
-Date: 2015-02-24
+Date: 2015-12-23
 Author: Panos Rontogiannis
 Maintainer: Panos Rontogiannis <p.g.ronto@gmail.com>
 Description: Read a table of fixed width formatted data of different types into
