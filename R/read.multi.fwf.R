@@ -28,7 +28,7 @@
 #' @param skip number of initial lines to skip; see \link{read.fwf}.
 #' @param n the maximum number of records (lines) to be read, defaulting to no limit.
 #' @param buffersize Maximum number of lines to read at one time
-#' @param dots further arguments to be passed to \link{read.fwf}.
+#' @param ... further arguments to be passed to \link{read.fwf}.
 #' @return Return value is a named list with an item for each spec in multi.spec. If there was at least one line in file, matching a spec, then the named item will be a \link{data.frame}. Otherwise it will be NULL.
 #' @details
 #' Known bugs:

@@ -42,7 +42,7 @@ If there is no match then NULL can be returned.}
 
 \item{buffersize}{Maximum number of lines to read at one time}
 
-\item{dots}{further arguments to be passed to \link{read.fwf}.}
+\item{...}{further arguments to be passed to \link{read.fwf}.}
 }
 \value{
 Return value is a named list with an item for each spec in multi.spec. If there was at least one line in file, matching a spec, then the named item will be a \link{data.frame}. Otherwise it will be NULL.
