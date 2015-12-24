@@ -1,7 +1,7 @@
 Package: multifwf
 Type: Package
 Title: Read Fixed Width Format Files Containing Lines of Different Type
-Version: 0.2.1
+Version: 0.2.2
 Date: 2015-12-23
 Author: Panos Rontogiannis
 Maintainer: Panos Rontogiannis <p.g.ronto@gmail.com>

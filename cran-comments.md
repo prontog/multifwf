@@ -2,6 +2,7 @@
 This is a resubmission. In this version, after  I have:
 
 * Added importFrom(utils,read.fwf) to NAMESPACE.
+* Bumped version to 0.2.2.
 
 ## Test environments
 * ubuntu 14.04.3 LTS, R 3.2.3
