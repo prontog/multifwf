@@ -1,5 +1,5 @@
 ## Resubmission
-This is a resubmission. In this version I have:
+This is a resubmission. In this version, after  I have:
 
 * Added importFrom(utils,read.fwf) to NAMESPACE.
 
@@ -9,7 +9,9 @@ This is a resubmission. In this version I have:
 * windows 7 SP1, R 3.2.4
 
 ## R CMD check results
-There were no ERRORs, WARNINGs or NOTEs.
+There were no ERRORs, WARNINGs.
+
+There was one NOTE because this is my first ever submission to CRAN.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
