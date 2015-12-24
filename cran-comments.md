@@ -1,3 +1,8 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Added importFrom(utils,read.fwf) to NAMESPACE.
+
 ## Test environments
 * ubuntu 14.04.3 LTS, R 3.2.3
 * ubuntu 12.04 (on travis-ci), R 3.2.3

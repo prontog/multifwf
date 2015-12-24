@@ -60,6 +60,7 @@
 #' #> sp1: 1 23 456 \ 1 98 765, sp2: 287 65 4
 #' 
 #' unlink(ff)
+#' @importFrom utils read.fwf
 #' @export
 read.multi.fwf <- function(file,
                            multi.specs,
