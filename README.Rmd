@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 
 # multifwf
 
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/multifwf)](http://cran.r-project.org/package=multifwf)
 [![Build Status](https://travis-ci.org/prontog/multifwf.svg)](https://travis-ci.org/prontog/multifwf)
 
 Read a table of fixed width formatted data of different types into a data.frame for each type. This package is for people that need to load a file that contains lines of different fixed with format. Think of it as an extension to the **read.fwf** function. One use-case is reading a log file containing messages of a fixed-width text protocol.
@@ -81,9 +82,12 @@ unlink(ff)
 
 ## Installation
 
-So far the package is not published in CRAN. You can either clone the repo and use RStudio to build and install the package or you could use [devtools](https://github.com/hadley/devtools) package to install directly from this repo.
+The easiest way to install `multifwf` is from CRAN with `install.packages('devtools')`.
 
-To build the package you will also need:
-* roxygen2
-* testthat (to check the package)
+To install directly from this repo you can use the [devtools](https://github.com/hadley/devtools) package.
+
+You can also clone the repo and build it yourself. The easiest way to do so is by opening *multifwf.Rproj* with *RStudio*. To build the package you will also need:
+
+* roxygen2 (for the documentation)
+* testthat (to test the package)
 * rstudio (optional)
