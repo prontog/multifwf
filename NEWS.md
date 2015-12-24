@@ -1,6 +1,8 @@
 multifwf 0.2.2
 ============
-* Added importFrom(utils,read.fwf).
+* Added importFrom(utils,read.fwf) to NAMESPACE.
+* Added 'Imports: utils' to DECSRIPTION file.
+* Added dependency on R versions >= 3.1.1. Just to be safe since I've never tested it on an earlier version.
 
 multifwf 0.2.1
 ============

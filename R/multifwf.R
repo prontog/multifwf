@@ -8,4 +8,5 @@
 #' @name multifwf
 #' @author
 #' Panos Rontogiannis \email{p.g.ronto@@gmail.com}
+#' @importFrom utils read.fwf
 NULL

@@ -7,8 +7,10 @@ Author: Panos Rontogiannis
 Maintainer: Panos Rontogiannis <p.g.ronto@gmail.com>
 Description: Read a table of fixed width formatted data of different types into
     a data.frame for each type.
+Depends: R (>= 3.1.1)
 License: GPL (>= 2)
 URL: https://github.com/prontog/multifwf
 BugReports: https://github.com/prontog/multifwf/issues
 RoxygenNote: 5.0.1
+Imports: utils
 Suggests: testthat

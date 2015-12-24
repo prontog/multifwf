@@ -12,7 +12,13 @@ This is a resubmission. In this version, after  I have:
 ## R CMD check results
 There were no ERRORs, WARNINGs.
 
-There was one NOTE because this is my first ever submission to CRAN.
+There were two NOTEs: 
 
+* checking CRAN incoming feasibility ... NOTE
+Maintainer: ‘Panos Rontogiannis <p.g.ronto@gmail.com>’
+New submission
+* checking package dependencies ... NOTE
+  No repository set, so cyclic dependency check skipped
+  
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
