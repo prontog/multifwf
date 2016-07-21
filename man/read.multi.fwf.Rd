@@ -50,10 +50,6 @@ Return value is a named list with an item for each spec in multi.spec. If there 
 \description{
 Read a table of fixed width formatted data of different types into a \link{data.frame} for each type.
 }
-\details{
-Known bugs:
-Warnings on connections that are left open. Haven't figured this out yet. Somehow some files are left opened.
-}
 \examples{
 ff <- tempfile()
 cat(file = ff, '123456', '287654', '198765', sep = '\\n')

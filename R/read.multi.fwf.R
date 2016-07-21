@@ -30,9 +30,6 @@
 #' @param buffersize Maximum number of lines to read at one time
 #' @param ... further arguments to be passed to \link{read.fwf}.
 #' @return Return value is a named list with an item for each spec in multi.spec. If there was at least one line in file, matching a spec, then the named item will be a \link{data.frame}. Otherwise it will be NULL.
-#' @details
-#' Known bugs:
-#' Warnings on connections that are left open. Haven't figured this out yet. Somehow some files are left opened.
 #' @author
 #' Panos Rontogiannis \email{p.g.ronto@@gmail.com}
 #' @seealso \code{\link{read.fwf}}
