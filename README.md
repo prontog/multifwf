@@ -2,7 +2,7 @@
 multifwf
 ========
 
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/multifwf)](http://cran.r-project.org/package=multifwf) [![Build Status](https://travis-ci.org/prontog/multifwf.svg)](https://travis-ci.org/prontog/multifwf)
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/multifwf)](http://cran.r-project.org/package=multifwf) [![Build Status](https://travis-ci.org/prontog/multifwf.svg)](https://travis-ci.org/prontog/multifwf) [![codecov](https://codecov.io/gh/prontog/multifwf/branch/master/graphs/badge.svg)](https://codecov.io/gh/prontog/multifwf)
 
 Read a table of fixed width formatted data of different types into a data.frame for each type. This package is for people that need to load a file that contains lines of different fixed with format. Think of it as an extension to the **read.fwf** function. One use-case is reading a log file containing messages of a fixed-width text protocol.
 
