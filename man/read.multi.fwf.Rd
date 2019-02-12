@@ -75,10 +75,9 @@ read.multi.fwf(ff, multi.specs = specs, select = myselector)
 
 unlink(ff)
 }
-\author{
-Panos Rontogiannis \email{p.g.ronto@gmail.com}
-}
 \seealso{
 \code{\link{read.fwf}}
 }
-
+\author{
+Panos Rontogiannis \email{p.g.ronto@gmail.com}
+}

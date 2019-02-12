@@ -1,3 +1,7 @@
+multifwf 0.5.0
+============
+* Added read_multi_fwf that uses readr::read_fwf to parse the files. This is usually considerably faster than read.fwf.
+
 multifwf 0.2.2
 ============
 * Added importFrom(utils,read.fwf) to NAMESPACE.
@@ -17,4 +21,4 @@ multifwf 0.2
 multifwf 0.1
 ============
 * First version
-* know bug: Warnings on connections that are left open.
+* known bug: Warnings on connections that are left open.

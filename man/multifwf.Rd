@@ -14,4 +14,3 @@ The only function you're likely to need from \pkg{multifwf} is \code{\link{read.
 \author{
 Panos Rontogiannis \email{p.g.ronto@gmail.com}
 }
-
